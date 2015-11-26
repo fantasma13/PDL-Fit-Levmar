@@ -20,7 +20,7 @@ typedef void (*DelMagic)(pdl *, int param);
 static void delete_levmar_pdls(pdl* p, int param);
 
 static void default_magic(pdl *p, int pa) { p->data = 0; }
-static pdl* pdl_wrap(void *data, int datatype, PDL_Long dims[],
+static pdl* pdl_wrap(void *data, int datatype, PDL_Indx dims[],
 		     int ndims, DelMagic delete_magic, int delparam);
 static SV *getref_pdl(pdl *it);
 
@@ -94,16 +94,16 @@ void DFP_create_pdls( DFP *dat, int data_type, int m, int n, int nt) {
   pdl *p_pdl, *x_pdl, *d_pdl, *t_pdl;
   SV  *p_sv, *x_sv, *d_sv, *t_sv;
   
-  PDL_Long mf_dims[] = {m};
+  PDL_Indx mf_dims[] = {m};
   int num_mf_dims = 1;
 
-  PDL_Long mjac_dims[] = {m,n}; // for jacobian 'd' variable
+  PDL_Indx mjac_dims[] = {m,n}; // for jacobian 'd' variable
   int num_mjac_dims = 2;
 
-  PDL_Long n_dims[] = {n};
+  PDL_Indx n_dims[] = {n};
   int num_n_dims = 1;
 
-  PDL_Long nt_dims[] = {nt};
+  PDL_Indx nt_dims[] = {nt};
   int num_nt_dims = 1;
 
 
@@ -155,7 +155,7 @@ void DFP_check(DFP **dat, int data_type, int m, int n, int nt, void *t ) {
 
 // Code from  PDL::API docs. For creating a pdl and giving it
 // data storage allocated elswhere.
-static pdl* pdl_wrap(void *data, int datatype, PDL_Long dims[],
+static pdl* pdl_wrap(void *data, int datatype, PDL_Indx dims[],
 		     int ndims, DelMagic delete_magic, int delparam)
 {
   pdl* npdl = PDL->pdlnew(); /* get the empty container */
