@@ -1040,3 +1040,4 @@ call_close_shared_object_file ( lib_handle, rval , error_message, nchar )
 
   ');
 
+pp_done();
